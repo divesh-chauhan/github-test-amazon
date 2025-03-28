@@ -26,7 +26,7 @@ app.use(session({
         maxAge : 5 * 60 * 1000
     }
 }));
-clea
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
