@@ -26,11 +26,15 @@ app.use(session({
         maxAge : 5 * 60 * 1000
     }
 }));
-
+clea
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+const productRouter = require('./routes/productRoute');
+
 app.use('/', (req, res) => res.render('index'));
+app.use('/product', productRouter);
+
 
 
 module.exports = app
