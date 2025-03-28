@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Product</h1>
+        <form action="/product/add" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" id="name" placeholder="product name" required>
+            <input type="number" name="price" id="price" placeholder="price" required>
+            <input type="file" name="image" id="image" required>
+            <input type="text" name="shortDescription" id="shortDescription" placeholder="shortDescription" required>
+            <input type="text" name="longDescription" id="longDescription" placeholder="longDescription" required>
+            <input type="text" name="category" id="category" placeholder="category" required>
+            <input type="number" name="stock" id="stock" placeholder="stock" required>
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+</body>
+</html>
