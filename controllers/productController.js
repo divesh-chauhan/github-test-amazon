@@ -41,8 +41,25 @@ const showProducts = async (req, res) => {
     }
 };
 
+// @des Show Product Details
+// @route GET/product/details/:productId
+const showProductDetails = async (req, res) => {
+    try {
+        const productId = req.params.productId;
+        const product = await Product.findById(productId);
+        if (! product) {
+            return res.status(400).json({error:'Product Not Found'});
+        }
+        res.render('productDetails', { product });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:'failed to Show Product Details ❌'});
+    }
+};
+
 
 module.exports = {
     addProducts,
-    showProducts
+    showProducts,
+    showProductDetails
 }
