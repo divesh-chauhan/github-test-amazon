@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Cart</title>
+</head>
+<body>
+   <% if (cart.products.length > 0) { %>
+    <div class="container">
+        <h1>Show Cart</h1>
+        <% cart.products.forEach(product => { %>
+            <img src="<%= product.productId.image %>" alt="<%= product.productId.name %>">
+            <p><%= product.productId.name %></p>
+            <P>Price : $ <%= product.productId.price %></P>
+            <P>Description : <%= product.productId.shortDescription %></P>
+
+            <form action="/cart/remove" method="POST">
+                <input type="hidden" name="<%= productId %>" value="<%= product.productId._id %>">
+                <button type="submit">Remove</button>
+            </form>
+        <% }) %>
+    </div>
+   <% } else { %>
+       <p>🛒 Cart was Empty ⚠</p>
+   <% }%>
+ 
+   <% if (cart.products.length > 0) { %>
+      <a href="/cart/checkout">Checkout</a>
+   <% } %>
+   
+</body>
+</html>
