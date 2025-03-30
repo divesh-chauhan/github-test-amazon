@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+</head>
+<body>
+    <h1>Checkout Page</h1>
+
+    <div class="container">
+       <div class="cart-grid">
+           <% cart.forEach(product => { %>
+           <div class="cart">
+                <img src="<%= product.productId.image %>" alt="<%= product.productId.name %>">
+                <div class="cart-details">
+                    <p><%= product.productId.name %></p>
+                    <p>(x<%= product.productId.price * product.quantity %>)</p>- <p>$<%= product.productId.price %></p>
+                </div>
+           </div>
+        <% }) %>
+       </div>
+    </div>
+
+    <div class="total-summary">
+        <p><strong>Sub Total:</strong> $ <%= subtotal %></p>
+        <p><strong>Tax(10%) :</strong> $ <%= tax %></p>
+        <p><strong>Shipping :</strong> $ <%= shipping %></p>
+        <p><strong>Total Price :</strong> $ <%= totalPrice %></p>
+    </div>
+
+    <form action="/order/place" method="POST">
+        <input type="hidden" name="userId" value="<%= userId %>">
+        <input type="hidden" name="subtotal" value="<%= subtotal %>">
+        <input type="hidden" name="tax" value="<%= tax %>">
+        <input type="hidden" name="shipping" value="<%= shipping %>">
+        <input type="hidden" name="totalPrice" value="<%= totalPrice %>">
+        <button type="submit">Place Order</button>
+    </form>
+</body>
+</html>
