@@ -32,9 +32,11 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const productRouter = require('./routes/productRoute');
 const userRouter = require('./routes/userRoute');
+const cartRouter = require('./routes/cartRoute');
 
 app.use('/product', productRouter);
 app.use('/user/auth', userRouter);
+app.use('/cart', cartRouter);
 app.use('/', (req, res) => res.render('index'));
 
 
