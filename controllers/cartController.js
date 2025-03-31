@@ -10,6 +10,10 @@ const addToCart = async (req, res) => {
     try {
         const { productId } = req.body;
         const userId = req.user.userId;
+        
+        if (!mongoose.isValidObjectId(productId)){
+            return res.status(400).json({ error: 'Invalid Product ID ❌' });
+        }
 
         const product = await Product.findById(productId);
 
