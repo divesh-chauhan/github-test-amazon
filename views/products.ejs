@@ -4,6 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Products</title>
+    <style>
+      *{
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+      .container {
+         width: 100%;
+         max-width: 1200px;
+         margin: 0 auto;
+         margin-top: 2rem;
+      }
+
+      h1{
+         text-align: center;
+         margin: 2rem 0;
+      }
+
+      .products-grid {
+         display: grid;
+         gap: 1rem;
+         grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
+      }
+
+      .product {
+         padding: 2rem;
+         background: #f9f9f9;
+         box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      }
+
+      .image-container {
+         width:75%;
+         margin: 0 auto;
+      }
+
+      img {
+         width: 100%;
+         background-size:contain;
+      }
+
+      .product-details p {
+         line-height: 2rem;
+      }
+      a {
+         display: inline-block;
+         text-decoration: none;
+         padding: 5px 20px;
+         border: 1px solid aqua;
+         background: aqua;
+         border-radius: 5px;
+         margin: 2rem 0;
+         color:#333;
+      }
+
+      button[type="submit"]{
+         width: 100%;
+         font-size: 1rem;
+         padding: 8px 20px;
+         border: 1px solid rgb(255, 217, 0);
+         background: rgb(255, 217, 0);
+         border-radius: 5px;
+         color:#333;
+         cursor: pointer;
+      }
+    </style>
 </head>
 <body>
    <div class="container">
