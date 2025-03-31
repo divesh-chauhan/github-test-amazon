@@ -11,7 +11,7 @@ const addToCart = async (req, res) => {
         const { productId } = req.body;
         const userId = req.user.userId;
 
-        const product = await Product.findById({ productId });
+        const product = await Product.findById(productId);
 
         if (!product){
             return res.status(400).json({error:'Product Not Found ❌'});
@@ -70,7 +70,7 @@ const removeCart = async (req, res) => {
         
         const objectId = new mongoose.Types.ObjectId(productId);
 
-        const cart = await Cart.findOneAndUpdate(userId,
+        const cart = await Cart.findOneAndUpdate({ userId },
             { $pull : { products : { productId : objectId }}},
             { new : true }
         );
