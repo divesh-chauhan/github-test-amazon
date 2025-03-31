@@ -16,7 +16,7 @@
             <P>Description : <%= product.productId.shortDescription %></P>
 
             <form action="/cart/remove" method="POST">
-                <input type="hidden" name="<%= productId %>" value="<%= product.productId._id %>">
+                <input type="hidden" name="productId" value="<%= product.productId._id %>">
                 <button type="submit">Remove</button>
             </form>
         <% }) %>
