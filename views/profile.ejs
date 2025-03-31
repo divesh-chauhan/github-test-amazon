@@ -6,9 +6,20 @@
     <title>Profile</title>
 </head>
 <body>
-    <form action="/user/auth/logout" method="POST">
-        <button type="submit">Logout</button>
-    </form>
+   <header>
+    <nav>
+        <div class="logo">
+            <h2>Home</h2>
+        </div>
+        <div class="links">
+            <a href="/">Home</a>
+            <a href="/product/show">Show Products</a>
+        </div>
+        <form action="/user/auth/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </nav>
+   </header>
     
     <h1>Welcome <%= username %> !</h1>
     <p>thank you so much for being a part of our site.</p>
