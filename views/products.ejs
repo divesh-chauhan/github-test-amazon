@@ -71,6 +71,7 @@
     </style>
 </head>
 <body>
+   <a href="/user/auth/profile">Profile</a>
    <div class="container">
       <h1>All Products</h1>
       <div class="products-grid">
@@ -78,7 +79,7 @@
             <div class="product">
                 <img src="<%= product.image %>" alt="<%= product.name %>">
                 <p><%= product.name %></p>
-                <p><%= product.price %></p>
+                <p>$<%= product.price %></p>
                 <p><%= product.shortDescription %></p>
                 <a href="/product/details/<%= product._id %>">Show Details</a>
                 <form action="/cart/add" method="POST">
