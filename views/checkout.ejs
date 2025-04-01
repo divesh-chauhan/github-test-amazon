@@ -6,6 +6,7 @@
     <title>Checkout Page</title>
 </head>
 <body>
+    <a href="/user/auth/profile">Profile</a>
     <h1>Checkout Page</h1>
 
     <div class="container">
@@ -15,7 +16,7 @@
                 <img src="<%= product.productId.image %>" alt="<%= product.productId.name %>">
                 <div class="cart-details">
                     <p><%= product.productId.name %></p>
-                    <p>(x<%= product.productId.price * product.quantity %>)</p>- <p>$<%= product.productId.price %></p>
+                    <p>(x<%= product.quantity %>)</p>- <p>$<%= product.productId.price * product.quantity </p>
                 </div>
            </div>
         <% }) %>
