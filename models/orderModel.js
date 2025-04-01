@@ -37,6 +37,11 @@ const orderSchema = new Schema({
     totalPrice:{
         type:Number,
         required:true
+    },
+    status : {
+        type:String,
+        enum:['Pending', 'Paid', 'Canceled'],
+        required:true
     }
 },{timestamps:true});
 
