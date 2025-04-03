@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Order = require('../models/orderModel');
 const Cart = require('../models/cartModel');
 
@@ -42,7 +43,7 @@ const placeOrder = async (req, res) => {
 
 
 // @des Show Order
-// @route POST/order/show
+// @route GET/order/show
 
 const showOrder = async (req, res) => {
     try {
@@ -60,6 +61,37 @@ const showOrder = async (req, res) => {
     }
 };
 
+
+
+// @des Remove Order
+// @route POST/order/remove
+
+const removeOrder = async (req, res) => {
+    try {
+        const { orderId, productId } = req.body;
+        let objectId = new mongoose.Types.objectId(productId);
+
+        let order = await Order.findOneAndUpdate({orderId}, 
+            {
+                $pull : { order : { products : objectId }}
+            },
+            { new : true }
+        );
+
+        if (!order) {
+            return res.status(400).json({error:'order not removed ❌'});
+        }
+
+        order = await Order.findById(orderId).populate('products.productId');
+
+        if(!order.products.legnth){
+           await Order.findOneAndUpdate({orderId})
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:'failed to remove order ❌'});
+    }
+};
 
 module.exports = {
     placeOrder,
