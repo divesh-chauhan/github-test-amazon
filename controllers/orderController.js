@@ -62,65 +62,7 @@ const showOrder = async (req, res) => {
 };
 
 
-
-// @des Remove Order
-// @route POST/order/remove
-
-const removeOrder = async (req, res) => {
-    try {
-        const { orderId, productId } = req.body;
-        let objectId = new mongoose.Types.objectId(productId);
-
-        let order = await Order.findOneAndUpdate({orderId}, 
-            {
-                $pull : { order : { products : objectId }}
-            },
-            { new : true }
-        );
-
-        if (!order) {
-            return res.status(400).json({error:'order not removed ❌'});
-        }
-
-        order = await Order.findById(orderId).populate('products.productId');
-
-        if(!order.products.legnth){
-           await Order.findOneAndUpdate({orderId},
-            {
-               subtotal : 0,
-               tax : 0,
-               shipping : 0,
-               totalPrice : 0
-            }
-           )
-        } else {
-
-            let newSubtotal = order.products.reduce((acc, product)=> acc + product.productId.price * product.quantity);
-            let newTax = newTax * 0.1;
-            let newShipping = newShipping > 1000 ? 0 : 100;
-            let newTotalPrice = newSubtotal + newTax + newShipping;
-
-            await Order.findOneAndUpdate({ orderId }, 
-                {
-                    subtotal : newSubtotal,
-                    tax : newTax,
-                    shipping : newShipping,
-                    totalPrice : newTotalPrice
-                },
-                { new : true }
-            );
-
-            res.set('Cache-Controll','no-store');
-            res.redirect('/order/show');
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({error:'failed to remove order ❌'});
-    }
-};
-
 module.exports = {
     placeOrder,
-    showOrder,
-    removeOrder
+    showOrder
 }
