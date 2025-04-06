@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Order</title>
+</head>
+<body>
+    <a href="/user/auth/profile"><button>Profile</button></a>
+    
+    <h1>Show Order</h1>
+    <% if (order.products.length > 0) { %>
+        <div class="order-container">
+            <div class="order-grid">
+                <% order.products(product => { %>
+                    <div class="order">
+                        <img src="<%= product.productId.image %>" alt="<%= product.productId.name %>">
+
+                        <div class="order-details">
+                            <p><%= product.productId.name %></p>
+                            <p>(x<%= product.quantity %>)</p>-
+                            <p>$<%= product.productId.price * product.quantity %></p>
+                        </div>
+            
+                        <form action="/order/remove" method="POST">
+                            <input type="hidden" name="orderId" value="<%= order._id %>">
+                            <input type="hidden" name="productId" value="<%= product.productId._id %>">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <div class="payment">
+            <p><strong>Sub Total :</strong>$<%= order.subtotal %></p>
+            <p><strong>Tax(10%):</strong>$<%= order.tax %></p>
+            <p><strong>Shipping :</strong>$<%= order.shipping %></p>
+            <p><strong>Total Price :</strong>$<%= order.totalPrice %></p>
+
+            <a href="/payment/<%= order._id %>"><button>Proceed to Payment</button></a>
+            <a href="/payment/details/<%= order._id %>"><button>Payment Details</button></a>
+        </div>
+    <% } else { %>
+        <p>There is no order available ⚠</p>
+    <% } %>
+</body>
+</html>
