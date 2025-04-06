@@ -12,7 +12,7 @@
     <% if (order.products.length > 0) { %>
         <div class="order-container">
             <div class="order-grid">
-                <% order.products(product => { %>
+                <% order.products.forEach(product => { %>
                     <div class="order">
                         <img src="<%= product.productId.image %>" alt="<%= product.productId.name %>">
 
