@@ -40,6 +40,27 @@ const placeOrder = async (req, res) => {
 };
 
 
+// @des Show Order
+// @route GET/order/show
+
+const showOrder = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const order = await Order.findOne({ userId }).populate('products.productId');
+
+        if(! order){
+            return res.status(400).json({error:'order not found ❌'});
+        }
+
+        res.render('order', { order });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:'failed to show order ❌'});
+    }
+};
+
+
 module.exports = {
-    placeOrder
+    placeOrder,
+    showOrder
 }
