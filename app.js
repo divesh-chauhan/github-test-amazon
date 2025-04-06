@@ -38,7 +38,6 @@ const orderRouter = require('./routes/orderRoute');
 app.use('/product', productRouter);
 app.use('/user/auth', userRouter);
 app.use('/cart', cartRouter);
-app.use('/order', orderRouter);
 app.use('/', (req, res) => res.render('index'));
 
 
