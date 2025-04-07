@@ -69,7 +69,7 @@ const removeOrder = async (req, res) => {
         const { orderId, productId } = req.body;
         const objectId = new mongoose.Types.ObjectId(productId);
 
-        let order = await Order.findByIdAndUpdate({orderId},
+        let order = await Order.findByIdAndUpdate(orderId,
             {$pull : { products : { productId : objectId }}},
             { new : true }
         );
@@ -78,10 +78,10 @@ const removeOrder = async (req, res) => {
             return res.status(400).json({error:'order was not removed ❌'});
         }
 
-        order = await order.findById(orderId).populate('products.productId');
+        order = await Order.findById(orderId).populate('products.productId');
 
         if(!order.products.length){
-            await Order.findByIdAndUpdate({orderId},
+            await Order.findByIdAndUpdate(orderId,
                 {
                     subtotal : 0,
                     tax : 0,
@@ -96,7 +96,7 @@ const removeOrder = async (req, res) => {
             let newShipping = newSubtotal > 1000 ? 0 : 100;
             let newPrice = newSubtotal + newTax + newShipping;
             
-            await Order.findByIdAndUpdate({ orderId }, 
+            await Order.findByIdAndUpdate(orderId , 
                 {
                     subtotal : newSubtotal,
                     tax : newTax,
