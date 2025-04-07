@@ -87,7 +87,8 @@ const removeOrder = async (req, res) => {
                     tax : 0,
                     shipping : 0,
                     totalPrice : 0
-                }
+                },
+                { new : true }
             );
         } else {
             let newSubtotal = order.products.reduce((acc, product) => acc + product.productId.price * product.quantity,0);
@@ -101,7 +102,8 @@ const removeOrder = async (req, res) => {
                     tax : newTax,
                     shipping : newShipping,
                     price : newPrice
-                }
+                },
+                { new : true }
             );
             
             res.set('Cache-Control','no-store');
