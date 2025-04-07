@@ -47,13 +47,13 @@ const placeOrder = async (req, res) => {
 const showOrder = async (req, res) => {
     try {
         const userId = req.user.userId;
-        const order = await Order.findOne({ userId }).populate('products.productId');
+        const orders = await Order.find({ userId }).sort({ createdAt : -1 }).populate('products.productId');
 
-        if(! order){
+        if(! orders || orders.length === 0){
             return res.status(400).json({error:'order not found ❌'});
         }
 
-        res.render('order', { order });
+        res.render('orders', { orders });
     } catch (error) {
         console.log(error);
         res.status(500).json({error:'failed to show order ❌'});
