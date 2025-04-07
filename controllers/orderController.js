@@ -90,24 +90,25 @@ const removeOrder = async (req, res) => {
                 },
                 { new : true }
             );
+            return res.redirect('/order/show');
         } else {
             let newSubtotal = order.products.reduce((acc, product) => acc + product.productId.price * product.quantity,0);
             let newTax = newSubtotal * 0.1;
             let newShipping = newSubtotal > 1000 ? 0 : 100;
-            let newPrice = newSubtotal + newTax + newShipping;
+            let newTotalPrice = newSubtotal + newTax + newShipping;
             
             await Order.findByIdAndUpdate(orderId , 
                 {
                     subtotal : newSubtotal,
                     tax : newTax,
                     shipping : newShipping,
-                    price : newPrice
+                    totalPrice : newTotalPrice
                 },
                 { new : true }
             );
             
             res.set('Cache-Control','no-store');
-            res.redirect('/order/show');
+            return res.redirect('/order/show');
         }
     } catch (error) {
         console.log(error);
