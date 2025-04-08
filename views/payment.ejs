@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Page</h1>
+
+        <div class="payment-container">
+            <p>Order ID : <%= order._id %></p>
+            <p>Total Amount : $<%= order.totalPrice %></p>
+        </div>
+
+        <form action="/payment/pay" method="POST">
+            <input type="hidden" name="orderId" value="<%= order._id %>">
+            <input type="hidden" name="userId" value="<%= order.userId %>">
+            <input type="hidden" name="paidAmount" value="<%= order.totalPrice %>">
+
+            <label for="paymentMethod">Payment Method</label>
+            <select name="paymentMethod" id="paymentMethod">
+                <option value="Cash">Cash</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="PayPal">PayPal</option>
+                <option value="Stripe">Stripe</option>
+                <option value="Bank Transaction">Bank Transaction</option>
+            </select>
+
+            <div id="transactionIdField">
+                <label for="transactionId">TransactionId</label>
+                <input type="text" name="transactionId" id="transactionId">
+            </div>
+
+            <button type="submit">Payment</button>
+        </form>
+    </div>
+
+    <script>
+       const paymentMethodSelect = document.getElementById("paymentMethod"); 
+       const transactioIdField = document.getElementById("transactionIdField");
+
+       const showTransactionId = () => {
+            const paymentMethod = paymentMethodSelect.value;
+
+            if(paymentMethod === 'Cash'){
+                transactioIdField.style.display = 'none';
+            }else{
+                transactioIdField.style.display = 'block';
+            }
+       };
+
+       document.addEventListener("DOMContentLoaded", showTransactionId);
+       paymentMethodSelect.addEventListener("change", showTransactionId);
+    </script>
+</body>
+</html>
