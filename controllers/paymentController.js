@@ -23,6 +23,40 @@ const showPaymentPage = async (req, res) => {
 
 
 
+// @des Payment
+// @route POST/payment/pay
+
+const payment = async (req,res) => {
+    try {
+        const { orderId, userId, paidAmount, paymentMethod, transactionId } = req.body;
+        const order = await Order.findById(orderId);
+
+        if(!order){
+            return res.status(400).json({error:'order was not found ❌'});
+        }
+
+        const payment = await new Payment({
+            userId,
+            orderId,
+            paidAmount,
+            paymentMethod,
+            transactionId,
+            status : 'Completed'
+        });
+
+        await payment.save();
+        order.status = 'Paid';
+        await order.save();
+
+        res.redirect('/payment/details');
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:'payment failed ❌'});
+    }
+};
+
+
 module.exports = {
-    showPaymentPage
+    showPaymentPage,
+    payment
 }
