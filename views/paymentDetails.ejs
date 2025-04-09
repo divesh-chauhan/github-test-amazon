@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Details</title>
+</head>
+<body>
+    <a href="/user/auth/profile">Profile</a>
+
+    <div class="container">
+        <h1>Payment Details.</h1>
+        <div class="payment-details">
+            <p><strong>TransactionId : </strong><%= payment.transactionId %></p>
+            <p><strong>Order ID : </strong><%= payment.orderId._id %></p>
+            <p><strong>User ID : </strong><%= payment.userId %></p>
+            <p><strong>Paid Amount</strong>$<%= payment.paidAmount%></p>
+            <p><strong>Payment Method : </strong><%= payment.paymentMethod %></p>
+            <p><strong>Payment Status : </strong><%= payment.status %></p>
+            <p><strong>Order Status : </strong><%= payment.orderId.status %></p>
+            <p><strong>Payment Date</strong> : <%= new Date(payment.createdAt).toDateString() %> </p>
+        </div>
+    </div>
+    
+</body>
+</html>
