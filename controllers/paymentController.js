@@ -56,7 +56,28 @@ const payment = async (req,res) => {
 };
 
 
+// @des Payment Details
+// @route GET/payment/details
+
+const showPaymentDetails = async (req, res) => {
+    try {
+        const orderId = req.params.orderId;
+        const payment = await Payment.findOne(orderId).populate('orderId');
+
+        if(!payment){
+            return res.status(400).json({error:'payment not found ❌'});
+        }
+
+        res.render('paymentDetails', { payment });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:'failed to show payment details ❌'});
+    }
+};
+
+
 module.exports = {
     showPaymentPage,
-    payment
+    payment,
+    showPaymentDetails 
 }
