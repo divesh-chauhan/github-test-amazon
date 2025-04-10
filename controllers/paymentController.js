@@ -62,7 +62,7 @@ const payment = async (req,res) => {
 const showPaymentDetails = async (req, res) => {
     try {
         const orderId = req.params.orderId;
-        const payment = await Payment.findOne(orderId).populate('orderId');
+        const payment = await Payment.findOne({orderId}).populate('orderId');
 
         if(!payment){
             return res.status(400).json({error:'payment not found ❌'});
