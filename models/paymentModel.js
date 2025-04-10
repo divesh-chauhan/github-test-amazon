@@ -23,7 +23,6 @@ const paymentSchema = new Schema({
     },
     transactionId:{
         type:String,
-        required:true
     },
     status:{
         type:String,
