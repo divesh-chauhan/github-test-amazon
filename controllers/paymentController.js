@@ -48,7 +48,7 @@ const payment = async (req,res) => {
         order.status = 'Paid';
         await order.save();
 
-        res.redirect('/payment/details');
+        res.status(201).json({success:'Payment was successfull ✅'});
     } catch (error) {
         console.log(error);
         res.status(500).json({error:'payment failed ❌'});
